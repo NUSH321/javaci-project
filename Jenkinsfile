@@ -6,7 +6,12 @@ pipeline {
             steps{
                 git branch: 'main', url: 'https://github.com/Vidhant007/javaci-project.git'
             }
+        }
 
+        stage('UNIT TESTING') {
+            steps {
+                sh 'mvn test'
+            }
         }
     }
 }
