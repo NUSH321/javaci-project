@@ -36,10 +36,36 @@ pipeline {
             }
         }
 
-        stage('QUALITY GATE STATUS') {
-            steps {
-                script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonarqubetoken'
+        // stage('QUALITY GATE STATUS') {
+        //     steps {
+        //         script {
+        //             waitForQualityGate abortPipeline: false, credentialsId: 'sonarqubetoken'
+        //         }
+        //     }
+        // }
+
+        stage('Upload Artifacts to Nexus'){
+            
+            steps{
+
+                script{
+
+                    nexusArtifactUploader artifacts: 
+                [
+                    [
+                    artifactId: 'springboot',
+                    classifier: '', 
+                    file: 'target/UPES.jar', 
+                    type: 'jar'
+                    ]
+                ], 
+                    credentialsId: 'nexuscreds', 
+                    groupId: 'com.example', 
+                    nexusUrl: '54.65.249.137:8081', 
+                    nexusVersion: 'nexus3', 
+                    protocol: 'http', 
+                    repository: 'java-release', 
+                    version: '1.0.0'
                 }
             }
         }
