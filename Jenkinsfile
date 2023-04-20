@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('GIT Checkout'){
             steps{
-                git branch: 'main', url: 'https://github.com/ArnimTaliyan/javaci-project.git'
+                git branch: 'main', url: 'https://github.com/NUSH321/javaci-project'
             }
         }
 
